@@ -130,6 +130,8 @@ void printReceipt(String coffee, String dessert, String size) {
   print('\nСкидка: $discountтг');
   print('ИТОГО: $totalтг');
   print('\n=================================');
+  //dsdaddsadsad
+  //ssdd
 }
 
 class MainApp extends StatelessWidget {
