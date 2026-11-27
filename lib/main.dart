@@ -16,14 +16,15 @@ Map<String, int> dessertMenu = {
 
 void main() {
   showMenu();
+  filterDessert(1500);
 
   print('\n------ Заказ ------');
 
   selectCoffee('Мокко');
+  manageAdditions();
+
   selectDessert('Чизкейк');
   selectCoffee('Эспрессо-тоник');
-
-  manageAdditions();
 
   print('Дополнительная плата за размер стакана: ${sizeExtraSwitch('M')}тг');
 
@@ -34,15 +35,16 @@ void main() {
 
 void manageAdditions() {
   List<String> additions = ['Карамель', 'Ваниль', 'Шоколад'];
+  int counter = 0;
 
   additions.add('Соленая карамель');
-  additions.remove('Ваниль');
+  //additions.remove('Ваниль');
 
-  if (additions.contains('Карамель')) {
-    print('Сладкий кофе!');
+  for (var add in additions) {
+    //ДОМАШНЕЕ ЗАДАНИЕ: Добавил for чтобы выводил добавки с порядковыми номерами
+    counter++;
+    print('$counter. ${add}');
   }
-
-  print('Добавки: ${additions.join(', ')}');
   print('Количество: ${additions.length}');
 }
 
@@ -52,13 +54,27 @@ void showMenu() {
   print('\n------ Кофе ------');
 
   coffeeMenu.forEach((key, value) {
-    print('$key: $valueтг');
+    print('$key: $valueтг'); //ДОМАШНЕЕ ЗАДАНИЕ: foreach для вывода каждого кофе в меню в виде КОФЕ: ЦЕНА
   });
 
   print('\n------ Десерты ------');
 
   dessertMenu.forEach((key, value) {
     print('$key: $valueтг');
+  });
+}
+
+void filterDessert(int maxPrice) {
+  var filteredDessert = dessertMenu.keys.where(
+    (dessert) => dessertMenu[dessert]! > maxPrice,
+  );
+
+  print('\nДесерты дороже $maxPrice тг:');
+
+  filteredDessert.forEach((dessert) {
+    print(
+      '$dessert: ${dessertMenu[dessert]}тг',
+    ); //ДОМАШНЕЕ ЗАДАНИЕ: where и foreach
   });
 }
 
@@ -130,8 +146,6 @@ void printReceipt(String coffee, String dessert, String size) {
   print('\nСкидка: $discountтг');
   print('ИТОГО: $totalтг');
   print('\n=================================');
-  //dsdaddsadsad
-  //ssdd
 }
 
 class MainApp extends StatelessWidget {
